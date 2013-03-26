@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	
+	<script>
+	PrimeFaces.locales['pt'] = {
+	    closeText: 'Fechar',
+	    prevText: 'Anterior',
+	    nextText: 'Próximo',
+	    currentText: 'Começo',
+	    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+	    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'],
+	    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+	    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+	    dayNamesMin: ['D','S','T','Q','Q','S','S'],
+	    weekHeader: 'Semana',
+	    firstDay: 0,
+	    isRTL: false,
+	    showMonthAfterYear: false,
+	    yearSuffix: '',
+	    timeOnlyTitle: 'Só Horas',
+	    timeText: 'Tempo',
+	    hourText: 'Hora',
+	    minuteText: 'Minuto',
+	    secondText: 'Segundo',
+	    ampm: false,
+	    month: 'Mês',
+	    week: 'Semana',
+	    day: 'Dia',
+	    allDayText : 'Todo o Dia'
+	};
+	</script>
+</h:head>
+<h:body>
+
+	<h:form id="frm">
+		<p:messages />
+	
+		<p:panelGrid columns="2">
+			<p:outputLabel value="Nome" for="nome"/>
+			<p:inputText id="nome" required="true" value="#{perfilUsuarioBean.nome}"/>
+		
+			<p:outputLabel value="Data de nascimento" for="dataNascimento" />
+			<p:calendar id="dataNascimento" required="true" value="#{perfilUsuarioBean.dataNascimento}" 
+				pattern="dd/MM/yyyy" readonlyInput="true" navigator="false"
+				pages="1" mode="popup" maxdate="#{perfilUsuarioBean.dataHoje}"
+				locale="pt" />
+		</p:panelGrid>
+		
+		<p:commandButton value="Atualizar" action="#{perfilUsuarioBean.atualizar}" update="@form"/>
+	</h:form>
+
+</h:body>
+</html>
