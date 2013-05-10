@@ -1,0 +1,32 @@
+@charset "utf-8";
+
+body {
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0px;
+	font-weight: normal;
+}
+
+header {
+	padding: 5px 0px;
+	margin-bottom: 20px;
+	height: 30px;
+	
+	background-color: #545454;
+	color: #fff;
+	
+	box-shadow: 0px 2px 2px #ccc;
+}
+
+header > div {
+	margin-left: 8px
+}
+
+#conteudo {
+	padding: 0px 8px
+}
+
+footer {
+	padding: 0px 8px;
+	margin-bottom: 10px
+}
