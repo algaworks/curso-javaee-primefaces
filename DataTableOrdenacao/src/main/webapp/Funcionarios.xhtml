@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</h:head>
+<h:body>
+
+	<h:form id="frm">
+		<p:dataTable value="#{funcionariosBean.funcionarios}" var="funcionario"
+				sortBy="#{funcionario.matricula}" sortOrder="descending">
+			<p:column headerText="Matrícula" style="text-align: center" width="90"
+					sortBy="#{funcionario.matricula}">
+				<h:outputText value="#{funcionario.matricula}"/>
+			</p:column>
+			<p:column headerText="Nome" sortBy="#{funcionario.nome}">
+				<h:outputText value="#{funcionario.nome}"/>
+			</p:column>
+			<p:column headerText="Data de admissão" width="180" style="text-align: center"
+					sortBy="#{funcionario.dataAdmissao}">
+				<h:outputText value="#{funcionario.dataAdmissao}">
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
+				</h:outputText>
+			</p:column>
+			<p:column headerText="Salário" width="140" style="text-align: right"
+					sortBy="#{funcionario.salario}">
+				<h:outputText value="#{funcionario.salario}">
+					<f:convertNumber type="currency" locale="pt_BR"/>
+				</h:outputText>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+
+</h:body>
+</html>
