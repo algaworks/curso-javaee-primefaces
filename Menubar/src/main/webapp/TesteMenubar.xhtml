@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</h:head>
+<h:body>
+
+	<h:form id="frm">
+		<p:menubar autoDisplay="false">
+			<p:submenu label="Cadastros">
+				<p:submenu label="Funcionário">
+					<p:menuitem value="Novo" outcome="NovoFuncionario" />
+					<p:menuitem value="Pesquisa" icon="ui-icon-search"
+						url="http://www.google.com.br" />
+				</p:submenu>
+			</p:submenu>
+		
+			<p:submenu label="Perfil">
+				<p:menuitem value="Dados pessoais" />
+				<p:separator/>
+				<p:menuitem value="Endereços" />
+				<p:menuitem value="E-mails" />
+			</p:submenu>
+			
+			<p:menuitem value="Sair" />
+		</p:menubar>
+	</h:form>
+
+</h:body>
+</html>
