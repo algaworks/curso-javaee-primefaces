@@ -1,0 +1,35 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+	<p:dataTable value="#{cadastroPedidoBean.itens}" var="item" id="tabelaItens">
+		<p:column headerText="SKU" style="text-align: center; width: 100px">
+			<p:inputText size="8" />
+		</p:column>
+		<p:column headerText="Produto">
+			<p:autoComplete styleClass="produto-tabela" />
+		</p:column>
+		<p:column headerText="Valor unitário" style="text-align: right; width: 120px">
+			<h:outputText value="R$ 0,00" />
+		</p:column>
+		<p:column headerText="Quantidade" style="text-align: center; width: 100px">
+			<p:inputText size="8" value="1" />
+		</p:column>
+		<p:column headerText="Estoque" style="text-align: center; width: 100px">
+			<h:outputText value="0" />
+		</p:column>
+		<p:column headerText="Valor total" style="text-align: right; width: 100px">
+			<h:outputText value="R$ 0,00"/>
+		</p:column>
+		
+		<p:columnGroup type="footer">
+			<p:row>
+				<p:column colspan="5" footerText="Subtotal" style="text-align: right" />
+				<p:column footerText="R$ 0,00" style="text-align: right" />
+			</p:row>
+		</p:columnGroup>
+	</p:dataTable>
+  	
+</ui:composition>
