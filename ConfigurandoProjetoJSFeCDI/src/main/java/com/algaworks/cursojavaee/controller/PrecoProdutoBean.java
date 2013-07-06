@@ -12,7 +12,7 @@ public class PrecoProdutoBean {
 	private CalculadoraPreco calculadora;
 	
 	public double getPreco() {
-		return calculadora.calcularPreco(12, 45.32);
+		return calculadora.calcularPreco(12, 44.55);
 	}
 	
 }
