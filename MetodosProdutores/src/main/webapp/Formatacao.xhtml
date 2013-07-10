@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</h:head>
+<h:body>
+
+	<h:form>
+		<p:calendar value="#{formatacaoBean.dataInformada}" pattern="dd/MM/yyyy" />
+		<p:commandButton value="Enviar" action="#{formatacaoBean.enviar}" update="@form" />
+		
+		<br/>
+		<h:outputText value="#{formatacaoBean.dataFormatada}" />
+	</h:form>
+
+</h:body>
+</html>
