@@ -1,0 +1,37 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+	<f:metadata>
+		<f:event listener="#{cadastroPedidoBean.inicializar}" type="preRenderView" />
+	</f:metadata>
+
+    <ui:define name="titulo">Novo pedido</ui:define>
+    
+    <ui:define name="corpo">
+    	<h:form>
+	    	<h1>Novo pedido</h1>
+	    	
+	    	<p:messages autoUpdate="true" closable="true" />
+	    	
+	    	<ui:include src="/WEB-INF/template/pedidos/BotoesPedido.xhtml" />
+	    	
+	    	<ui:include src="/WEB-INF/template/pedidos/CapaPedido.xhtml" />
+	    	
+	    	<p:tabView style="margin-top: 20px">
+	    		<p:tab title="Itens">
+	    		</p:tab>
+	    		<p:tab title="Dados de entrega">
+	    		<ui:include src="/WEB-INF/template/pedidos/DadosEntregaPedido.xhtml" />
+	    		</p:tab>
+	    		<p:tab title="Observação">
+	    			<ui:include src="/WEB-INF/template/pedidos/ObservacaoPedido.xhtml" />
+	    		</p:tab>
+	    	</p:tabView>
+	    	
+    	</h:form>
+    </ui:define>
+</ui:composition>
