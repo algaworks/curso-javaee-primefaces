@@ -1,0 +1,60 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+	<p:panelGrid columns="4" style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo, rotulo, campo">
+		<p:outputLabel value="Número" rendered="#{cadastroPedidoBean.pedido.existente}" />
+		<h:outputText value="#{cadastroPedidoBean.pedido.id}" rendered="#{cadastroPedidoBean.pedido.existente}" />
+		
+		<p:outputLabel value="Data de criação" rendered="#{cadastroPedidoBean.pedido.existente}" />
+        <h:outputText value="#{cadastroPedidoBean.pedido.dataCriacao}" rendered="#{cadastroPedidoBean.pedido.existente}">
+        	<f:convertDateTime pattern="dd/MM/yyyy" />
+        </h:outputText>
+        
+        <p:outputLabel value="Status"/>
+        <h:outputText value="#{cadastroPedidoBean.pedido.status.descricao}" />
+        
+        <p:outputLabel value="Vendedor" for="vendedor"/>
+        <p:selectOneMenu id="vendedor" value="#{cadastroPedidoBean.pedido.vendedor}">
+            <f:selectItem itemLabel="Selecione" />
+            <f:selectItems value="#{cadastroPedidoBean.vendedores}" var="vendedor"
+            	itemValue="#{vendedor}" itemLabel="#{vendedor.nome}" />
+        </p:selectOneMenu>
+        
+        <p:outputLabel value="Cliente" for="cliente"/>
+        <p:autoComplete id="cliente" size="40" dropdown="true" 
+        	value="#{cadastroPedidoBean.pedido.cliente}" completeMethod="#{cadastroPedidoBean.completarCliente}"
+        	var="cliente" itemLabel="#{cliente.nome}" itemValue="#{cliente}" forceSelection="true" />
+        
+        <p:outputLabel value="Forma de pagamento" for="formaPagamento"/>
+        <p:selectOneMenu id="formaPagamento" value="#{cadastroPedidoBean.pedido.formaPagamento}">
+            <f:selectItem itemLabel="Selecione" />
+            <f:selectItems value="#{cadastroPedidoBean.formasPagamento}" var="formaPagamento"
+            	itemValue="#{formaPagamento}" itemLabel="#{formaPagamento.descricao}" />
+        </p:selectOneMenu>
+        
+        <p:outputLabel value="Valor do frete" for="valorFrete"/>
+        <p:inputText id="valorFrete" size="10" maxlength="10" styleClass="moeda" 
+        	value="#{cadastroPedidoBean.pedido.valorFrete}">
+        	<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+        </p:inputText>
+        
+        <p:outputLabel value="Subtotal" style="font-weight: bold"/>
+        <h:outputText value="R$ 0,00" style="font-weight: bold" id="subtotal" />
+        
+        <p:outputLabel value="Valor de desconto" for="valorDesconto"/>
+        <p:inputText id="valorDesconto" size="10" maxlength="10" styleClass="moeda" 
+        	value="#{cadastroPedidoBean.pedido.valorDesconto}">
+        	<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+        </p:inputText>
+        
+        <p:outputLabel value="Total do pedido" style="font-weight: bold; font-size: 1.1em"/>
+        <h:outputText value="#{cadastroPedidoBean.pedido.valorTotal}" 
+        	style="font-weight: bold; font-size: 1.1em" id="totalPedido">
+        	<f:convertNumber type="currency" />
+        </h:outputText>
+	</p:panelGrid>
+  	
+</ui:composition>
