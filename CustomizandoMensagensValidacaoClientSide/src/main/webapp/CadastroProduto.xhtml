@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputScript name="locales.js" />
+</h:head>
+<h:body>
+	<p:messages id="msgs" autoUpdate="true" />
+
+	<h:form id="frm" prependId="false">
+
+		<h:panelGrid columns="3">
+			<p:outputLabel value="Nome" for="nome" />
+			<p:inputText id="nome" value="#{cadastroProdutoBean.nome}" required="true">
+				<f:validateLength maximum="10" />
+				<p:clientValidator event="keyup" />
+			</p:inputText>
+			<p:message for="nome" />
+			
+			<p:outputLabel value="Preço" for="preco" />
+			<p:inputText id="preco" value="#{cadastroProdutoBean.preco}" 
+				validatorMessage="Preço deve ser no máximo R$100">
+				<f:validateDoubleRange maximum="100" />
+				<p:clientValidator event="keyup" />
+			</p:inputText>
+			<p:message for="preco" />
+			
+			<h:outputLabel/>
+			<p:commandButton value="Cadastrar" action="#{cadastroProdutoBean.cadastrar}"
+				validateClient="true" ajax="true" update=":msgs @form" />
+		</h:panelGrid>
+		
+	</h:form>
+
+</h:body>
+</html>
