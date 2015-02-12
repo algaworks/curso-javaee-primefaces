@@ -1,0 +1,54 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+    
+    <beans:bean id="appUserDetailsService" class="com.algaworks.pedidovenda.security.AppUserDetailsService" />
+    
+	<beans:bean id="exceptionTranslationFilter" class="org.springframework.security.web.access.ExceptionTranslationFilter">
+	    <beans:property name="accessDeniedHandler" ref="jsfAccessDeniedHandler"/>
+	    <beans:property name="authenticationEntryPoint" ref="authenticationEntryPoint"/>
+	</beans:bean>
+	
+	<beans:bean id="jsfAccessDeniedHandler" class="com.algaworks.pedidovenda.security.JsfAccessDeniedHandler">
+	    <beans:property name="loginPath" value="/AcessoNegado.xhtml" />
+	    <beans:property name="contextRelative" value="true" />
+	</beans:bean>
+	
+	<beans:bean id="authenticationEntryPoint" class="com.algaworks.pedidovenda.security.JsfLoginUrlAuthenticationEntryPoint">
+	    <beans:property name="loginFormUrl" value="/Login.xhtml"/>
+	    <beans:property name="redirectStrategy" ref="jsfRedirectStrategy" />
+	</beans:bean>
+	
+	<beans:bean id="jsfRedirectStrategy" class="com.algaworks.pedidovenda.security.JsfRedirectStrategy"/>
+    
+    <http pattern="/Login.xhtml" security="none" />
+    <http pattern="/Erro.xhtml" security="none" />
+    <http pattern="/javax.faces.resource/**" security="none" />
+    
+	<http auto-config="false" use-expressions="true">
+		<custom-filter ref="exceptionTranslationFilter" before="FILTER_SECURITY_INTERCEPTOR" />
+	
+		<intercept-url pattern="/Home.xhtml" access="isAuthenticated()" />
+		<intercept-url pattern="/AcessoNegado.xhtml" access="isAuthenticated()" />
+		<intercept-url pattern="/dialogos/**" access="isAuthenticated()" />
+		<intercept-url pattern="/pedidos/**" access="hasAnyRole('VENDEDORES', 'AUXILIARES', 'ADMINISTRADORES')" />
+		<intercept-url pattern="/produtos/**" access="hasAnyRole('ADMINISTRADORES')" />
+		<intercept-url pattern="/relatorios/**" access="hasAnyRole('ADMINISTRADORES')" />
+		<intercept-url pattern="/**" access="denyAll" />
+		
+		<form-login login-page="/Login.xhtml" authentication-failure-url="/Login.xhtml?invalid=true" 
+			default-target-url="/" always-use-default-target="true" />
+		<logout logout-url="/j_spring_security_logout" invalidate-session="true" />
+	</http>
+	
+	<authentication-manager>
+		<authentication-provider user-service-ref="appUserDetailsService">
+			<!-- <password-encoder hash="md5" /> -->
+		</authentication-provider>
+	</authentication-manager>
+           
+</beans:beans>
