@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+	<p:toolbar style="margin-top: 20px">
+  		<p:toolbarGroup>
+  			<p:button value="Novo" outcome="/pedidos/CadastroPedido"/>
+  			<p:commandButton value="Salvar" action="#{cadastroPedidoBean.salvar}"
+  				update="@form" disabled="#{cadastroPedidoBean.pedido.naoAlteravel}" />
+  		</p:toolbarGroup>
+  		
+  		<p:toolbarGroup align="right">
+  			<p:commandButton value="Emitir" action="#{emissaoPedidoBean.emitirPedido}" 
+  				process="@form" update="@form" 
+  				disabled="#{cadastroPedidoBean.pedido.naoEmissivel or not seguranca.emitirPedidoPermitido}" />
+  			<p:commandButton value="Cancelar" action="#{cancelamentoPedidoBean.cancelarPedido}"
+  				process="@this" update="@form"
+  				disabled="#{cadastroPedidoBean.pedido.naoCancelavel or not seguranca.cancelarPedidoPermitido}" />
+  			<p:commandButton value="Enviar por e-mail" action="#{envioPedidoEmailBean.enviarPedido}"
+  				process="@this" disabled="#{cadastroPedidoBean.pedido.naoEnviavelPorEmail}" />
+  			
+  			<p:separator/>
+  		
+  			<p:button value="Pesquisa" outcome="/pedidos/PesquisaPedidos" />
+  		</p:toolbarGroup>
+  	</p:toolbar>
+  	
+</ui:composition>
