@@ -1,0 +1,57 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+		<f:metadata>
+			<f:viewAction action="#{checkout.validar}" />
+		</f:metadata>
+		
+		<h1>Confirme os dados de sua compra</h1>
+		<br/>
+		
+		<h:form>
+		
+			<p:messages autoUpdate="true" />
+		
+			<p:panelGrid columns="2">
+				<p:outputLabel value="Serviço" />
+				<h:outputText value="#{checkout.ordemServico.descricao}" />
+				
+				<p:outputLabel value="Placa do veículo" />
+				<h:outputText value="#{checkout.ordemServico.placaVeiculo}" />
+				
+				<p:outputLabel value="Data agendada" />
+				<h:outputText value="#{checkout.ordemServico.dataAgendada}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+			
+				<p:outputLabel value="Nome" />
+				<h:outputText value="#{checkout.ordemServico.cliente.nome}" />
+			
+				<p:outputLabel value="Telefone" />
+				<h:outputText value="#{checkout.ordemServico.cliente.telefone}" />
+
+				<p:outputLabel value="E-mail" />
+				<h:outputText value="#{checkout.ordemServico.cliente.email}" />
+				
+				<p:outputLabel value="Número do cartão" />
+				<h:outputText value="#{checkout.ordemServico.pagamento.numeroCartaoProtegido}" />
+				
+				<p:outputLabel value="Validade do cartão" />
+				<h:outputText value="#{checkout.ordemServico.pagamento.mesValidade}/#{checkout.ordemServico.pagamento.anoValidade}" />
+			</p:panelGrid>
+			<br/>
+			
+			<p:button value="Anterior" outcome="Pagamento">
+				<f:param name="cid" value="#{javax.enterprise.context.conversation.id}" />
+			</p:button>
+			<p:commandButton value="Confirmar" action="#{checkout.emitirRecibo}" />
+		</h:form>
+		
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,44 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+		<f:metadata>
+			<f:viewAction action="#{checkout.validar}" />
+		</f:metadata>
+	
+		<h1>Pagamento</h1>
+		<br/>
+		
+		<h:form>
+			<p:messages autoUpdate="true" />
+		
+			<p:panelGrid columns="2">
+				<p:outputLabel value="Cartão de crédito" for="cartao" />
+				<p:inputText value="#{checkout.ordemServico.pagamento.numeroCartao}" id="cartao"
+					size="30" />
+			
+				<p:outputLabel value="Validade" />
+				<h:panelGroup>
+					<p:inputText value="#{checkout.ordemServico.pagamento.mesValidade}" label="Mês de validade"
+						size="4" maxlength="2" />
+					<p:outputLabel value=" / "/>
+					<p:inputText value="#{checkout.ordemServico.pagamento.anoValidade}" label="Ano de validade"
+						size="6" maxlength="4" />
+				</h:panelGroup>
+				
+				<p:outputLabel value="Código de segurança" for="codigoSeguranca" />
+				<p:inputText value="#{checkout.ordemServico.pagamento.codigoSeguranca}" id="codigoSeguranca"
+					size="8" maxlength="6" />
+			</p:panelGrid>
+			<br/>
+			
+			<p:commandButton value="Anterior" action="DadosPessoais?faces-redirect=true" process="@this" />
+			<p:commandButton value="Próximo" action="Confirmacao?faces-redirect=true" />
+		</h:form>
+	</ui:define>
+
+</ui:composition>
