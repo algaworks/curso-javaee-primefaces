@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration>
+	<Appenders>
+		<Console name="console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d %-5p [%c] %m%n" />
+		</Console>
+		
+		<RollingFile name="arquivo"
+			fileName="${sys:catalina.home}/logs/pedido-venda.log"
+			filePattern="${sys:catalina.home}/logs/pedido-venda-%d{yyyy-MM-dd}-%i.log">
+		
+			<PatternLayout pattern="%d %-5p [%c] %m%n" />
+			
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="1 MB" />
+			</Policies>
+		</RollingFile>
+	</Appenders>
+	
+	<Loggers>
+		<Root level="info">
+			<AppenderRef ref="console" />
+			<AppenderRef ref="arquivo" />
+		</Root>
+	</Loggers>
+	
+</Configuration>
