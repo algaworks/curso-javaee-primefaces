@@ -11,6 +11,15 @@ public class DataValor implements Serializable {
 	private Date data;
 	private BigDecimal valor;
 
+	public DataValor() {
+	}
+	
+	public DataValor(Date data, BigDecimal valor) {
+		super();
+		this.data = data;
+		this.valor = valor;
+	}
+
 	public Date getData() {
 		return data;
 	}
