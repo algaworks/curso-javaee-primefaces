@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.0.3.final using JasperReports Library version 6.0.3  -->
+<!-- 2015-02-14T14:18:49 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_pedidos_emitidos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4b264aa4-2429-4ff6-9463-8913b9748525">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MySQL PedidoVenda"/>
+	<parameter name="data_inicio" class="java.util.Date"/>
+	<parameter name="data_fim" class="java.util.Date"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     pedido.`data_criacao` AS data_criacao,
+     pedido.`valor_total` AS valor_total,
+     cliente.`nome` AS nome_cliente,
+     usuario.`nome` AS nome_vendedor,
+     pedido.`id` AS codigo
+FROM
+     `cliente` cliente INNER JOIN `pedido` pedido ON cliente.`id` = pedido.`cliente_id`
+     INNER JOIN `usuario` usuario ON pedido.`vendedor_id` = usuario.`id`
+WHERE
+     pedido.`status` = 'EMITIDO'
+ AND pedido.`data_criacao` BETWEEN $P{data_inicio} and $P{data_fim}
+ORDER BY
+     pedido.`data_criacao` ASC]]>
+	</queryString>
+	<field name="data_criacao" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="valor_total" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nome_cliente" class="java.lang.String"/>
+	<field name="nome_vendedor" class="java.lang.String"/>
+	<field name="codigo" class="java.lang.Long"/>
+	<variable name="soma_valor_total" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor_total}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="69" splitType="Stretch">
+			<staticText>
+				<reportElement x="56" y="10" width="443" height="40" uuid="2698e8dc-52e9-4222-b2f0-4ac38acbdbd5"/>
+				<textElement textAlignment="Center">
+					<font size="28"/>
+				</textElement>
+				<text><![CDATA[Relatório de Pedidos Emitidos]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="19" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="110" height="17" uuid="bea575c5-7ebf-4aaf-98f8-e95ae1f953a5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data de criação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="0" width="50" height="17" uuid="a24912e7-809a-451f-a126-bea2fb0bbcfc"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="0" width="170" height="17" uuid="4e92cda2-348b-425a-adf1-e5e730c6e9ba"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="0" width="130" height="17" uuid="db679564-7e4d-4821-943e-983c6872baea"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vendedor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="0" width="90" height="17" uuid="8383caf9-4c4e-4f16-be4a-c01e5d47939b"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="0" width="110" height="17" uuid="4f6be6e5-961f-49f4-bf25-fdc9ed085a5c"/>
+				<textFieldExpression><![CDATA[$F{data_criacao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="0" width="50" height="17" uuid="60ce719e-0b35-41ca-992f-294e1bea0fba"/>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="0" width="170" height="17" uuid="152d4754-aefc-49fc-93e1-34dbae9321a1"/>
+				<textFieldExpression><![CDATA[$F{nome_cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="0" width="130" height="17" uuid="fa2534cf-77e0-4e60-a016-3cd9731ccebf"/>
+				<textFieldExpression><![CDATA[$F{nome_vendedor}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="460" y="0" width="90" height="17" uuid="07591c96-e4a0-4b6a-a468-8ac1f35ced81"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{valor_total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="37" splitType="Stretch">
+			<textField>
+				<reportElement x="370" y="10" width="180" height="19" uuid="85d96c3a-8476-4e29-95ea-de03a38dcf6d"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+ $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="37" splitType="Stretch">
+			<textField pattern="¤#,##0.00;¤-#,##0.00">
+				<reportElement x="435" y="9" width="115" height="19" uuid="c82c4bec-fb06-45fc-9e95-040fc2013c93"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{soma_valor_total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
