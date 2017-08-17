@@ -1,0 +1,63 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:o="http://omnifaces.org/ui">
+
+    <ui:define name="titulo">#{cadastroUsuarioBean.editando ? 'Edição de usuario' : 'Novo usuario'}</ui:define>
+    
+    <ui:define name="corpo">
+    	<f:metadata>
+    		<o:viewParam name="usuario" value="#{cadastroUsuarioBean.usuario}" />
+    		<f:viewAction action="#{cadastroUsuarioBean.inicializar}" />
+    	</f:metadata>
+
+    	<h:form id="frm" autocomplete="off">
+			<p:focus context="frm" />
+			
+	    	<h1>#{cadastroUsuarioBean.editando ? 'Edição de usuário' : 'Novo usuário'}</h1>
+	    	
+	    	<p:messages autoUpdate="true" closable="true" />
+	    	
+	    	<p:toolbar style="margin-top: 20px">
+	    		<p:toolbarGroup>
+	    			<p:button value="Novo" outcome="/usuarios/CadastroUsuario" />
+	    			<p:commandButton value="Salvar" id="botaoSalvar"
+	    				action="#{cadastroUsuarioBean.salvar}" update="@form"
+	    				validateClient="false" />
+	    		</p:toolbarGroup>
+	    		<p:toolbarGroup align="right">
+	    			<p:button value="Pesquisa" outcome="/usuarios/PesquisaUsuarios" />
+	    		</p:toolbarGroup>
+	    	</p:toolbar>
+	    	
+	    	<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
+	    			columnClasses="rotulo, campo">
+	    		<p:outputLabel value="Nome" for="nome"/>
+	    		<p:inputText id="nome" size="60" maxlength="80" value="#{cadastroUsuarioBean.usuario.nome}" />
+	    		
+	    		<p:outputLabel value="E-mail" for="email"/>
+	    		<p:inputText id="email" size="60" value="#{cadastroUsuarioBean.usuario.email}" autocomplete="new-password"/>
+	    		
+	    		<p:outputLabel value="Senha" for="senha"/>
+	    		<p:password id="senha" size="30" maxlength="20" value="#{cadastroUsuarioBean.usuario.senha}" autocomplete="new-password"/>
+	    	</p:panelGrid>
+	    	
+	    	<p:spacer height="15px"/>
+	    	
+	    	<p:tabView>
+	    		<p:tab title="Grupos">
+	    			<p:pickList value="#{cadastroUsuarioBean.listaGrupos}" var="grupo" itemValue="#{grupo}"
+	    				itemLabel="#{grupo.descricao}" showSourceFilter="true" showTargetFilter="true"
+	    				showCheckbox="true" filterMatchMode="contains"
+	    				converter="grupoConverter">
+	    				<f:facet name="sourceCaption">Grupos disponíveis</f:facet>
+	    				<f:facet name="targetCaption">Grupos do usuário</f:facet>
+	    			</p:pickList>
+	    		</p:tab>
+	    	</p:tabView>
+    	</h:form>
+    </ui:define>
+</ui:composition>
