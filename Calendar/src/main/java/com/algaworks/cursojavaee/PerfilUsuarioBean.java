@@ -16,7 +16,7 @@ public class PerfilUsuarioBean implements Serializable {
 
 	private String nome;
 	private Date dataNascimento;
-
+         // Function
 	public void atualizar() {
 		System.out.println("Data nascimento: " + this.dataNascimento);
 
