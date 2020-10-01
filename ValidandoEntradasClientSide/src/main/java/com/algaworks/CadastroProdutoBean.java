@@ -36,4 +36,4 @@ public class CadastroProdutoBean {
 		this.preco = preco;
 	}
 
-}
+}//End
